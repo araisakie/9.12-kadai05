@@ -3,7 +3,6 @@ const router = express.Router();
 const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("wishlist.db");
 
-// コメントわかるように書いて
 /* ホームのページ */
 router.get("/", (req, res) => {
   try {
@@ -23,7 +22,6 @@ router.get("/", (req, res) => {
   }
 });
 
-// try catchで囲む
 /* 検索 */
 router.get("/search", (req, res) => {
   try {
@@ -47,7 +45,6 @@ router.get("/search", (req, res) => {
   }
 });
 
-// これが何してるかコメント
 /* 検索のページ */
 router.get("/add", (req, res) => {
   const data = {
@@ -56,8 +53,6 @@ router.get("/add", (req, res) => {
   res.render("add", data);
 });
 
-// 日本語で簡潔に説明
-// 全部next消す
 /* 編集のページ */
 router.get("/edit", (req, res) => {
   const data = {
@@ -66,7 +61,6 @@ router.get("/edit", (req, res) => {
   res.render("edit", data);
 });
 
-// try catchで囲む
 /* 新規登録 */
 router.post("/", (req, res) => {
   try {
@@ -84,11 +78,9 @@ router.post("/", (req, res) => {
   }
 });
 
-// try catchで囲む
 /* 編集 */
 router.get("/edit/:id", (req, res) => {
   try {
-    // 分割代入にする
     const { id } = req.params;
     db.serialize(() => {
       db.get("select * from wishlist where id = ?", [id], (err, row) => {
@@ -106,8 +98,6 @@ router.get("/edit/:id", (req, res) => {
   }
 });
 
-// try catchで囲む
-// 分割代入にする
 router.put("/:id", (req, res) => {
   try {
     const { wish, memo, finished } = req.body;
@@ -127,8 +117,6 @@ router.put("/:id", (req, res) => {
 });
 
 /* delete */
-// 分割代入にする
-// try catchで囲む
 router.delete("/:id", (req, res) => {
   try {
     const { id } = req.params;
