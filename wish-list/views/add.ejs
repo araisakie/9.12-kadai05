@@ -1,0 +1,13 @@
+<%- include('./header')%>
+<form method="post" action="/wishlist">
+  <label for="wish">やりたいこと</label>
+  <input type="text" name="wish" id="wish" />
+  <label for="memo">詳細</label>
+  <input type="text" name="memo" id="memo" />
+  <label for="finished">いつまでに</label>
+  <input type="text" name="finished" id="finished" />
+  <button class="add-btn">保存</button>
+  <button class="cancel-btn">キャンセル</button>
+</form>
+
+<%- include('./footer')%>

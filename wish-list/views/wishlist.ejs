@@ -1,0 +1,28 @@
+<%- include('./header')%>
+<form method="get" action="/wishlist/search">
+  <label for="search"></label>
+  <input type="text" name="wish" id="search" />
+  <button class="search-btn">検索</button>
+</form>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>wish</th>
+    <th>memo</th>
+    <th>投稿日</th>
+    <th>期限</th>
+  </tr>
+  <% for (var i in content){ %>
+  <tr>
+    <% var obj = content[i] %>
+    <td class="id"><%= obj.id %></td>
+    <td class="wish"><%= obj.wish %></td>
+    <td class="memo"><%= obj.memo %></td>
+    <td class="created"><%= obj.created %></td>
+    <td class="finished"><%= obj.finished %></td>
+    <td><a href="/wishlist/edit/<%= obj.id %>">編集</a></td>
+  </tr>
+
+  <% } %>
+</table>
+<%- include('./footer')%>

@@ -1,0 +1,51 @@
+<%-include('./header') %>
+<script>
+  /*DELETE Javascript*/
+  async function deleteWish(uid) {
+    const res = await fetch("http://localhost:3000/wishlist/" + uid, {
+      method: "DELETE",
+    });
+    location.href = "/wishlist";
+  }
+  /*PUT Javascript*/
+  async function updateWish(uid) {
+    const wish = document.getElementById("wish").value;
+    const memo = document.getElementById("memo").value;
+    const finished = document.getElementById("finished").value;
+
+    /*request body*/
+    const body = {
+      wish: wish,
+      memo: memo,
+      finished: finished,
+    };
+
+    const res = await fetch("http://localhost:3000/wishlist/" + uid, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    location.href = "/wishlist";
+  }
+</script>
+<label for="id">ID</label>
+<input type="text" name="id" id="id" value="<%= mydata.id %>" disabled />
+<label for="wish">やりたいこと</label>
+<input type="text" name="wish" id="wish" value="<%= mydata.wish %>" />
+<label for="memo">詳細</label>
+<input type="text" name="memo" id="memo" value="<%= mydata.memo %>" />
+<label for="finished">いつまでに</label>
+<input
+  type="text"
+  name="finished"
+  id="finished"
+  value="<%= mydata.finished %>"
+/>
+<input type="button" value="保存" onclick="updateWish(`<%=mydata.id%>`)" />
+
+<button class="cancel-btn" onclick="location.href='/wishlist'">
+  キャンセル
+</button>
+<input type="button" value="削除" onclick="deleteWish(`<%=mydata.id%>`)" />
+
+<%-include('./footer') %>
